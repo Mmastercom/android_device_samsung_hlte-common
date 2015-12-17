@@ -34,9 +34,9 @@ TARGET_SCREEN_WIDTH := 1080
 SCREEN_RATIO_PROPORTIONATE := true
 TARGET_SCREEN_ASPECT_RATIO := 16by9
 
-$(call inherit-product, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 
-$(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-hwui-memory.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -112,10 +112,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/libnfc-brcm-20791b05.conf:system/etc/libnfc-brcm-20791b05.conf \
     $(LOCAL_PATH)/configs/libnfc-brcm-20791b04.conf:system/etc/libnfc-brcm-20791b04.conf \
     $(LOCAL_PATH)/configs/libnfc-brcm.conf:system/etc/libnfc-brcm.conf
-
-# Kryten2k35 OTAUpdates
-PRODUCT_PACKAGES += \
-    OTAUpdates
 
 # Radio
 PRODUCT_PACKAGES += \
