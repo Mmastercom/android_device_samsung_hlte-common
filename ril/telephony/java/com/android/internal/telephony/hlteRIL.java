@@ -63,8 +63,8 @@ public class hlteRIL extends RIL implements CommandsInterface {
     private static final int RIL_REQUEST_DIAL_EMERGENCY = 10001;
     public static final long SEND_SMS_TIMEOUT_IN_MS = 30000;
 
-    public hlteRIL(Context context, int networkModes, int cdmaSubscription) {
-        this(context, networkModes, cdmaSubscription, null);
+    public hlteRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
+        this(context, preferredNetworkType, cdmaSubscription, null);
         mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
     }
 
@@ -245,7 +245,7 @@ public class hlteRIL extends RIL implements CommandsInterface {
             int np = p.readInt();
             dc.numberPresentation = DriverCall.presentationFromCLIP(np);
             dc.name = p.readString();
-                dc.namePresentation = p.readInt();
+            dc.namePresentation = DriverCall.presentationFromCLIP(p.readInt());
             int uusInfoPresent = p.readInt();
             if (uusInfoPresent == 1) {
                 dc.uusInfo = new UUSInfo();
@@ -648,6 +648,16 @@ public class hlteRIL extends RIL implements CommandsInterface {
                 CommandException.Error.REQUEST_NOT_SUPPORTED);
             AsyncResult.forMessage(result, null, ex);
             result.sendToTarget();
+        }
+    }
+
+    @Override
+    public void getRadioCapability(Message response) {
+        riljLog("getRadioCapability: returning static radio capability");
+        if (response != null) {
+            Object ret = makeStaticRadioCapability();
+            AsyncResult.forMessage(response, ret, null);
+            response.sendToTarget();
         }
     }
 }
