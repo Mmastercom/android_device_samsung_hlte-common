@@ -40,6 +40,7 @@ $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui
 
 # Permissions
 PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.consumerir.xml:system/etc/permissions/android.hardware.consumerir.xml \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
@@ -55,25 +56,19 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
     $(LOCAL_PATH)/audio/silence.wav:system/etc/sound/silence.wav
 
-# GPS
-PRODUCT_PACKAGES += \
-    gps.msm8974
-
 # camera
 PRODUCT_PACKAGES += \
     camera.msm8974 \
     libstlport \
     libxml2
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gps/etc/gps.conf:/system/etc/gps.conf \
-    $(LOCAL_PATH)/gps/etc/flp.conf:/system/etc/flp.conf \
-    $(LOCAL_PATH)/gps/etc/sap.conf:/system/etc/sap.conf \
-    $(LOCAL_PATH)/gps/etc/izat.conf:/system/etc/izat.conf
-
 # Input device
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/idc/sec_e-pen.idc:system/usr/idc/sec_e-pen.idc
+
+# IR
+PRODUCT_PACKAGES += \
+    consumerir.msm8974
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
